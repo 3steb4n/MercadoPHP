@@ -1,0 +1,2 @@
+DROP DATABASE VirtualMarket;
+CREATE DATABASE VirtualMarket;
