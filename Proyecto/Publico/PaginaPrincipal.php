@@ -15,9 +15,8 @@
   </head>
   <body>
 	  <?php
-	  require '../PHP/DatabaseConnection.php'; //se realiza instacion con el archivo de conexion
+	  require '../PHP/DatabaseConnection.php'; //se realiza instancia con el archivo de conexion
 	  $ConnectionInstance = new DatabaseConnection();
-	  $ConnectionDb = $ConnectionInstance -> ConnectDatabase();
 	  ?>
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,6 +61,9 @@
 				</a>
 			</nav>
 			<br>
+			<?php
+				$ConnectionDb = $ConnectionInstance -> ConnectDatabase();
+			?>
 		</div>
   </body>
 </html>
