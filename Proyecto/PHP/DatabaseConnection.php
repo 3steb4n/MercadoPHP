@@ -2,9 +2,9 @@
 class DatabaseConnection{
     public function ConnectDatabase(){
         $server = "localhost";
-        $dataBase = "root";
-        $userNameDataBase = "Qwerty123*";
-        $passwordDataBase = "";
+        $dataBase = "virtualmarket";
+        $userNameDataBase = "root";
+        $passwordDataBase = "Qwerty123*";
 
         $connectDataBase = mysqli_connect($server, $userNameDataBase, $passwordDataBase, $dataBase);
 
