@@ -34,6 +34,7 @@
     <?php
 include "../PHP/DatabaseConnection.php";
 $connectionInstance = new DatabaseConnection();
+$codProd = "";
 $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
 ?>
 	<div class="container">
@@ -87,7 +88,10 @@ $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
                             ?>
             <div id="formularioActualizar">
                 <div class="form-group">
-                <form action="../PHP/UpdateData.php" method="post">
+                <form action="../PHP/UpdateData.php" method="post" enctype="multipart/form-data">
+                    <label for="exampleInputEmail1">Código del Producto</label>
+                    <input type="text" req class="form-control" id="exampleInputEmail1" value="<?php echo $filasDatosProductos[13] ?>" disabled="disabled">
+                    <br>
                     <label for="exampleInputEmail1">Nombre del Producto</label>
                     <input type="text" req class="form-control" id="exampleInputEmail1" name="nombreProducto" placeholder="*Nombre del Producto" value="<?php echo $filasDatosProductos[0] ?>" required>
                     <br>
@@ -165,13 +169,13 @@ $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
                                 <div class="input-group">
                                     <span class="input-group-btn">
                                     <span class="btn btn-default btn-file">
-                                    Buscar... <input type="file" id="imgInp">
+                                    Buscar... <input type="file"  id="imgInp" name="cargarImagen">
                                     </span>
                                     </span>
                                     <input type="text" value="<?php echo $filasDatosProductos[12]; ?>" class="form-control" readonly>
                                 </div>
                             <img src="../Iconos_o_Imagenes/ProductoImagenes/<?php echo $filasDatosProductos[12]; ?>"  id='img-upload'/>
-                            <input type="hidden" name="codigoProducto" value="<?php echo $filasDatosProductos[13]; ?>">
+                            <input type="hidden" name="codigoProducto" value="<?php echo $filasDatosProductos[13]; $codProd = $filasDatosProductos[13];?>">
                         </div>
                     </div>
                     <?php
@@ -184,6 +188,11 @@ $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
                 </div>
                 <br>
                 <button type="submit" class="btn btn-info">Actualizar Producto</button>
+                </form>
+                <br>
+                <form action="../PHP/DeleteData.php" method="post">
+                <input type="hidden" name="codigoProducto" value="<?php echo $codProd;?>">
+                <button type="submit" name="eliminarProducto" class="btn btn-danger">Eliminar Producto</button>
                 </form>
             </div>
         </div>
