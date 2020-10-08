@@ -107,7 +107,7 @@
 								<br>
 								<br>
 								<form action="ActualizarProductos.php" method="post" class="btn btn-info btn-lg">
-									<input type="hidden" name="codigoProducto" value="<?php echo $filasDatos[0]; ?>">
+									<input type="hidden" name="codigoProducto" value="<?php echo $filasDatos[5]; ?>">
 									<button class="glyphicon glyphicon-edit"  type="submit"> Editar</button>
 								</form>
 								</div>
@@ -115,7 +115,12 @@
 							}
 						}else{
 							?>
+							<div style="width: 65%; padding: 10px;">
+							<img src="../Iconos_o_Imagenes/css/Error.png" alt="" srcset="">
+							<div style="float: right;">
 							<h1>No hay resultados</h1>
+							</div>
+							</div>
 							<?php
 						}
 					}
