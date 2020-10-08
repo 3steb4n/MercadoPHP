@@ -25,7 +25,7 @@
         $codigoProducto = $_POST['codigoProducto'];
         $consultaProducto = "SELECT PRODUCTOS.NOMBRE_PRODUCTO, PRODUCTOS.DESCRIPCION_PRODUCTO, DETALLE_PRODUCTO.VALOR_PRODUCTO, CATEGORIAS.NOMBRE_CATEGORIA, PRODUCTOS.ID_PRODUCTO, DETALLE_PRODUCTO.FECHA_VENCIMIENTO,
         DETALLE_PRODUCTO.TALLA_PRODUCTO, DETALLE_PRODUCTO.PESO_PRODUCTO, DETALLE_PRODUCTO.MARCA_PRODUCTO, DETALLE_PRODUCTO.COLOR_PRODUCTO, DETALLE_PRODUCTO.VALOR_PRODUCTO,
-        DETALLE_PRODUCTO.STOCK_PRODUCTO, DETALLE_PRODUCTO.RUTA_IMAGEN FROM PRODUCTOS, DETALLE_PRODUCTO, CATEGORIAS WHERE PRODUCTOS.ID_PRODUCTO = DETALLE_PRODUCTO.ID_PRODUCTO 
+        DETALLE_PRODUCTO.STOCK_PRODUCTO, DETALLE_PRODUCTO.RUTA_IMAGEN, PRODUCTOS.ID_PRODUCTO FROM PRODUCTOS, DETALLE_PRODUCTO, CATEGORIAS WHERE PRODUCTOS.ID_PRODUCTO = DETALLE_PRODUCTO.ID_PRODUCTO 
         and CATEGORIAS.ID_CATEGORIA = PRODUCTOS.ID_CATEGORIA and PRODUCTOS.ID_PRODUCTO = '$codigoProducto';";
         }else{
             header("Location: PaginaPrincipal.php");
@@ -87,16 +87,16 @@ $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
                             ?>
             <div id="formularioActualizar">
                 <div class="form-group">
-                <form action="" method="post">
+                <form action="../PHP/UpdateData.php" method="post">
                     <label for="exampleInputEmail1">Nombre del Producto</label>
-                    <input type="text" req class="form-control" id="exampleInputEmail1" placeholder="*Nombre del Producto" value="<?php echo $filasDatosProductos[0] ?>" required>
+                    <input type="text" req class="form-control" id="exampleInputEmail1" name="nombreProducto" placeholder="*Nombre del Producto" value="<?php echo $filasDatosProductos[0] ?>" required>
                     <br>
                     <label for="exampleFormControlTextarea5">*Descripción del Producto</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea4" rows="3" required><?php echo $filasDatosProductos[1] ?></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea4" name="descripcionProducto" rows="3" required><?php echo $filasDatosProductos[1] ?></textarea>
                     <br>
                     <label for="exampleInputEmail1">*Categoria del Producto</label>
                     <br>
-                    <select name="" id="" value="sdsd">
+                    <select name="categoriaProducto" id="" value="sdsd">
                     <?php
                     if ($connectionDb) {
                         if ($resultadosConsulta = mysqli_query($connectionDb, $consultarCategorias)) {
@@ -116,47 +116,46 @@ $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
                     <br>
                     <label for="exampleInputEmail1">Fecha de Vencimiento (Opcional)</label>
                     <br>
-                    <input type="date" name="Fecha de Vencimiento">
+                    <input type="date" name="fechaVencimiento">
                     <br>
                     <br>
                     <label for="exampleInputEmail1">Talla del Producto (Opcional)</label>
                     <br>
-                    <select name="" id="">
-                        <option value="">S</option>
-                        <option value="">M</option>
-                        <option value="">L</option>
-                        <option value="">XL</option>
-                        <option value="">2XL</option>
-                        <option value="">2XL</option>
-                        <option value="">4XL</option>
-                        <option value="">2XS</option>
-                        <option value="">XS</option>
+                    <select name="tallaProducto" id="">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="2XL">2XL</option>
+                        <option value="4XL">4XL</option>
+                        <option value="2XS">2XS</option>
+                        <option value="XS">XS</option>
                     </select>
                     <br>
                     <br>
                     <label for="exampleInputEmail1">Peso del Producto (En kilogramos)</label>
                     <br>
-                    <input type="number" value="<?php echo $filasDatosProductos[7]; ?>" class="form-control" id="exampleInputEmail1" placeholder="*Peso del producto"  required>
+                    <input type="number" name="pesoProducto" value="<?php echo $filasDatosProductos[7]; ?>" class="form-control" id="exampleInputEmail1" placeholder="*Peso del producto"  required>
                     <br>
                     <br>
                     <label for="exampleInputEmail1">Marca del producto</label>
                     <br>
-                    <input type="text" value="<?php echo $filasDatosProductos[8]; ?>"  class="form-control" id="exampleInputEmail1" placeholder="*Marca del producto"  required>
+                    <input type="text" name="marcaProducto" value="<?php echo $filasDatosProductos[8]; ?>"  class="form-control" id="exampleInputEmail1" placeholder="*Marca del producto"  required>
                     <br>
                     <br>
                     <label for="exampleInputEmail1">Color del producto</label>
                     <br>
-                    <input type="text" value="<?php echo $filasDatosProductos[9]; ?>"  class="form-control" id="exampleInputEmail1" placeholder="*Color del producto"  required> 
+                    <input type="text" name="colorProducto" value="<?php echo $filasDatosProductos[9]; ?>"  class="form-control" id="exampleInputEmail1" placeholder="*Color del producto"  required> 
                     <br>
                     <br>
                     <label for="exampleInputEmail1">Valor del Producto (En pesos Colombianos)</label>
                     <br>
-                    <input type="number" value="<?php echo $filasDatosProductos[10]; ?>" class="form-control" id="exampleInputEmail1" placeholder="*Valor del Producto" required>
+                    <input type="number" name="valorProducto" value="<?php echo $filasDatosProductos[10]; ?>" class="form-control" id="exampleInputEmail1" placeholder="*Valor del Producto" required>
                     <br>
                     <br>
                     <label for="exampleInputEmail1">Cantidad disponible en inventario</label>
                     <br>
-                    <input type="number" value="<?php echo $filasDatosProductos[11]; ?>" class="form-control" id="exampleInputEmail1" placeholder="*Stock"  required>
+                    <input type="number" name="cantidadDisponible" value="<?php echo $filasDatosProductos[11]; ?>" class="form-control" id="exampleInputEmail1" placeholder="*Stock"  required>
                     <br>
                     <br>
                     <div class="container">
@@ -172,6 +171,7 @@ $consultarCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
                                     <input type="text" value="<?php echo $filasDatosProductos[12]; ?>" class="form-control" readonly>
                                 </div>
                             <img src="../Iconos_o_Imagenes/ProductoImagenes/<?php echo $filasDatosProductos[12]; ?>"  id='img-upload'/>
+                            <input type="hidden" name="codigoProducto" value="<?php echo $filasDatosProductos[13]; ?>">
                         </div>
                     </div>
                     <?php
