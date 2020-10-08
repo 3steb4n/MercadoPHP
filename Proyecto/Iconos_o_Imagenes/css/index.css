@@ -1,0 +1,45 @@
+#div_productos {
+    border: 1px solid #b5b5b5;
+    width: 30.5%;
+    height: 460px;
+    padding: 5px;
+    float: left;
+    margin: 10px;
+}
+
+#contenidoProductos {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+}
+
+#formularioActualizar {
+    border: 1px solid black;
+    width: 100%;
+    padding: 10px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload {
+    width: 100%;
+}
