@@ -108,7 +108,7 @@
 								<br>
 								<form action="ActualizarProductos.php" method="post" class="btn btn-info btn-lg">
 									<input type="hidden" name="codigoProducto" value="<?php echo $filasDatos[5]; ?>">
-									<button class="glyphicon glyphicon-edit"  type="submit"> Editar</button>
+									<button type="submit" class="btn btn-info">Editar</button>
 								</form>
 								</div>
 								<?php
