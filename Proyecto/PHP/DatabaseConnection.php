@@ -10,11 +10,7 @@ class DatabaseConnection{
 
         if(!$connectDataBase){
             echo "Error al realizar la conexion con la base de datos - : \n" . mysqli_connect_error($connectDataBase);
-
-        }else{
-            echo "Yes";
-        }
-
+        }  
         return $connectDataBase;
     }
 }
