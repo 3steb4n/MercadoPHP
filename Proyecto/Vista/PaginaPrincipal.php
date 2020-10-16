@@ -19,7 +19,7 @@
   </head>
   <body>
 	  <?php
-	  require '../PHP/DatabaseConnection.php'; //se realiza instancia con el archivo de conexion
+	  require 'PHP/DatabaseConnection.php'; //se realiza instancia con el archivo de conexion
 	  $connectionInstance = new DatabaseConnection();
 	  $consultaProductos = "SELECT DETALLE_PRODUCTO.RUTA_IMAGEN, PRODUCTOS.NOMBRE_PRODUCTO, PRODUCTOS.DESCRIPCION_PRODUCTO, DETALLE_PRODUCTO.VALOR_PRODUCTO, 
 	  CATEGORIAS.NOMBRE_CATEGORIA, PRODUCTOS.ID_PRODUCTO FROM PRODUCTOS, DETALLE_PRODUCTO, CATEGORIAS WHERE PRODUCTOS.ID_PRODUCTO = DETALLE_PRODUCTO.ID_PRODUCTO and CATEGORIAS.ID_CATEGORIA = PRODUCTOS.ID_CATEGORIA and 
@@ -41,7 +41,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">
-			<img src="../Iconos_o_Imagenes/laptop.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+			<img src="Iconos_o_Imagenes/laptop.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				Tienda Virtual
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Iniciar Sesion</a>
+							<a class="nav-link" href="Vista/Login.php">Iniciar Sesion</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Ofertas</a>
@@ -77,7 +77,7 @@
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 				</form>
 				<a class="nav-link" href="#">
-				<img src="../Iconos_o_Imagenes/carro.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+				<img src="Iconos_o_Imagenes/carro.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				</a>
 			</nav>
 			<div id="contenidoProductos">
@@ -129,5 +129,15 @@
 			<br>
 			</div>
 		</div>
+		   <section>
+       <?php
+
+          if (isset($_GET["accion"])) {
+          	$MVC_MOD = NEW Controlador;
+          	$MVC_MOD -> f_EnlacesPaginasControlador();
+          }
+          
+       ?>   
+   </section>
   </body>
 </html>

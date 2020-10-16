@@ -15,12 +15,14 @@
 </head>
 <body>
 	<div class="container">
-	  <div class="abs-center">
-	  	<figure class="figure">
-  			<img src="../Iconos_o_Imagenes/laptop.png" class="figure-img img-fluid rounded" alt="..." width="250" height="250">
-  			
-		</figure>
+	  <div class="abs-center" >
+
+	  		
 	    <form action="#" class="border p-3 form">
+	    <label for="staticEmail" class="col-sm-2 col-form-label">
+	    	<img src="../Iconos_o_Imagenes/laptop.png" class="mx-auto img-fluid img-thumbnail"  width="150" height="150">
+	    </label>
+
 	    	<h4 class="h4" align="center">Tienda virtual</h1>
 	      <div class="form-group">
 	        <label for="email">Ingrese Usuario</label>
@@ -33,6 +35,6 @@
 	      <button type="submit" class="btn btn-primary">Ingresar</button>
 	    </form>
 	  </div>
-	</div>		
+	</div>	
 </body>
 </html>

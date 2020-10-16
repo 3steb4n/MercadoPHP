@@ -14,7 +14,7 @@ if(isset($_POST['codigoProducto'])){
 
     if($connectionDb){
         if($resultadoUpdateProd = mysqli_query($connectionDb, $eliminarProducto)){
-            header("Location: ../Publico/PaginaPrincipal.php");
+            header("Location: ../Vista/PaginaPrincipal.php");
         }
     }
 }

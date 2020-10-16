@@ -58,7 +58,7 @@ if (isset($_POST['codigoProducto'])) {
                         move_uploaded_file($tempName, $imagen);
                     }       
                 }
-                header("Location: ../Publico/PaginaPrincipal.php");
+                header("Location: ../Vista/PaginaPrincipal.php");
             }
         }
     }
