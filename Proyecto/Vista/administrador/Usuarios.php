@@ -90,11 +90,12 @@
 
 					<tbody>
 						<?php
-						require_once "../../PHP/DatabaseConnection.php";
+						include '../../PHP/DatabaseConnection.php';
 
 						
 						$sql = "SELECT * FROM USUARIOS";
-						$db = DatabaseConnection::ConnectDatabase();
+                        $connectionInstance = new DatabaseConnection();
+                        $db = $connectionInstance->ConnectDatabase();
 						$resultado = mysqli_query($db,$sql);
 
 						if($resultado){
