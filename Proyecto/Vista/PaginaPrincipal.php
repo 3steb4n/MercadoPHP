@@ -1,3 +1,8 @@
+<?php
+error_reporting(0);
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -49,9 +54,20 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
+					<?php 
+					if($_SESSION['userName'] == "")
+					{
+					?>
 						<li class="nav-item">
 							<a class="nav-link" href="Vista/Login.php">Iniciar Sesion</a>
 						</li>
+						<?php
+					}else{
+						?>
+						<li class="nav-item">
+							<a class="nav-link" href="Vista/usuarios/CerrarSesion.php">Cerrar Sesion</a>
+						</li>
+					<?php } ?>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Ofertas</a>
 						</li>
@@ -79,6 +95,17 @@
 				<a class="nav-link" href="#">
 				<img src="Iconos_o_Imagenes/carro.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				</a>
+				<?php
+				if($_SESSION['userName'] != ""){
+				?>
+				<ul class="navbar-nav">
+                    <li class="nav-item">
+					    <a class="nav-link" href="Vista/Login.php"><?php echo $_SESSION['userName']; ?></a>
+					</li>
+				</ul>
+				<?php 		
+				}
+				?>
 			</nav>
 			<div id="contenidoProductos">
 			<?php
