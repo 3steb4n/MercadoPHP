@@ -1,6 +1,7 @@
 <?php
-require_once "../../PHP/DatabaseConnection.php";
-    $db = DatabaseConnection::ConnectDatabase();
+include '../../PHP/DatabaseConnection.php';
+$connectionInstance = new DatabaseConnection();
+$db = $connectionInstance->ConnectDatabase();
 
  if (isset($_GET['ID_USUARIO']))
     {
