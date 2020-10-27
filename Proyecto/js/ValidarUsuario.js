@@ -1,6 +1,5 @@
 function verificarLog(userName, userPassword) {
     var mensaje = document.getElementById("mensaje");
-    alert(userName + "\n" + userPassword);
 
     if (userName == "" || userPassword == "") {
         mensaje.innerHTML = "Error. Uno de los campos está vacio. <br> <br>";
