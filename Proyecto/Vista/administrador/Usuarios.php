@@ -18,7 +18,7 @@
 </head>
 		<body>
 
-			<div class="container">
+			<div>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">
 			<img src="../../Iconos_o_Imagenes/laptop.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
