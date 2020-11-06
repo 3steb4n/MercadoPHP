@@ -31,7 +31,10 @@
 	      </div>
 		  <span id="mensaje" style="color: red;"></span>
 	      <button type="button" onclick="verificarLog(email.value, password.value)" class="btn btn-primary">Ingresar</button>
+	      <a href="NuevoUsuario.php" class="btn btn-primary">Reguistrate</a>
+	    	<a href="Olvido_Contraseña.php">Olvido su Contraseña</a>
 	    </form>
+
 	  </div>
 	</div>	
 </body>
