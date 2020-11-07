@@ -22,11 +22,11 @@
 			<div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="inputEmail4">Nombre</label>
-			      <input type="email" class="form-control" id="inputEmail4">
+			      <input type="text" class="form-control" id="nombre" name="nombre">
 			    </div>
 			    <div class="form-group col-md-6">
 			      <label for="inputPassword4">Apellido</label>
-			      <input type="password" class="form-control" id="inputPassword4">
+			      <input type="text" class="form-control" id="apellido" name="apellido">
 			    </div>
 			  </div>
 			  <div class="form-row">
@@ -39,7 +39,7 @@
 				</div>	
 			  <div class="form-group col-md-6">
 			    <label for="inputAddress">Numero de Documento</label>
-			    <input type="text" class="form-control" id="inputAddress" placeholder="ejemplo123">
+			    <input type="num" class="form-control" id="ndocumento" name="ndocumento" placeholder="ejemplo123">
 			  </div>
 				 <div class="form-group col-md-6">
 					Telefono: <input type="tel" class="form-control" id="telefono" name="telefono"><br/>
@@ -49,7 +49,7 @@
 				</div>
 			<div class="form-group col-md-6" >
 			    <label for="inputAddress2">Direccion</label>
-			    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+			    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle 50 sur no 12-40">
 			  </div>
 			  <div class="form-group col-md-6">
 				Ciudad: <select class="form-control" id="ciudad" name="ciudad">
@@ -58,22 +58,15 @@
 					<option value="3">medellin</option>
 				</select>
 				</div>
-				<div class="form-group col-md-6">
-				Rol: <select class="form-control" id="rol" name="rol">
-					<option value="1">Activo</option>
-					<option value="2">Inactivo</option>
-					<option value="3">Bloqueado</option>
-				</select>
-				</div>
+				
 			</div>
-			
 			<div class="form-group">
 					Email: <input type="text"  class="form-control" id="email" name="email"><br/>
 				</div>
 			<div class="form-group">
 					Fecha Nacimiento: <input type="date"  class="form-control" id="fecha" name="fecha"><br/>
 			</div>	
-			  <button type="submit" class="btn btn-primary btn-lg btn-block">Reguistrar</button>
+			  <button type="submit" id="guardar" name ="guardar" class="btn btn-primary btn-lg btn-block">Reguistrar</button>
 		</div>
 	</form>
 
