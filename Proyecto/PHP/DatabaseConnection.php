@@ -4,7 +4,7 @@ class DatabaseConnection{
         $server = "localhost";
         $dataBase = "virtualmarket";
         $userNameDataBase = "root";
-        $passwordDataBase = "1q2w3e4r";
+        $passwordDataBase = "Qwerty123*";
 
         $connectDataBase = mysqli_connect($server, $userNameDataBase, $passwordDataBase, $dataBase);
 
