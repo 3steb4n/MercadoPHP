@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Iniciar Seccion</title>
+	<title>Iniciar Sesión</title>
 	 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -31,8 +31,8 @@
 	      </div>
 		  <span id="mensaje" style="color: red;"></span>
 	      <button type="button" onclick="verificarLog(email.value, password.value)" class="btn btn-primary">Ingresar</button>
-	      <a href="NuevoUsuario.php" class="btn btn-primary">Reguistrate</a>
-	    	<a href="Olvido_Contrasena.php">Olvido su Contraseña</a>
+	      <a href="usuarios/NuevoUsuario.php" class="btn btn-primary">Registrate</a>
+	    	<a href="usuarios/FormularioOlvidoClave.php">Olvido su Contraseña</a>
 	    </form>
 
 	  </div>
