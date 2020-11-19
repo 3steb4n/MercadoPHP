@@ -11,10 +11,77 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="../../Iconos_o_Imagenes/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
 	<title>Usuarios</title>
+	<script type="text/javascript">
+	jQuery(function ($) {
+        $("#exportButton").click(function () {
+            // parse the HTML table element having an id=exportTable
+            var dataSource = shield.DataSource.create({
+                data: "#exportTable",
+                schema: {
+                    type: "table",
+                    fields: {
+                        Nombre: { type: String },
+                        Apellido: { type: Number },
+						TipoDocumento: { type: String },
+						NumeroDocumento: { type: String },
+						Usuario: { type: String },
+						Clave: { type: String },
+						Dirección: { type: String },
+						Telefono: { type: String },
+						Celular: { type: String },
+						Email: { type: String },
+						FechaRegistro: { type: String },
+						FechaNacimiento: { type: String },
+						Ciudad: { type: String },
+						Rol: { type: String },
+						Estado: { type: String }
+                    }
+                }
+            });
+
+            dataSource.read().then(function (data) {
+                var pdf = new shield.exp.PDFDocument({
+                    author: "PrepBootstrap",
+                    created: new Date()
+                });
+
+                pdf.addPage("a4", "portrait");
+
+                pdf.table(
+                    50,
+                    50,
+                    data,
+                    [
+                        { field: "Nombre", title: "Nombre", width: 80 },
+						{ field: "Usuario", title: "Usuario", width: 80 },
+						{ field: "Clave", title: "Clave", width: 80 },
+						{ field: "Telefono", title: "Telefono", width: 80 },
+						{ field: "Celular", title: "Celular", width: 80 },
+						{ field: "Email", title: "Email", width: 80 }
+                    ],
+                    {
+                        margins: {
+                            top: 50,
+                            left: 50
+                        }
+                    }
+                );
+
+                pdf.saveAs({
+                    fileName: "PrepBootstrapPDF"
+                });
+            });
+        });
+    });
+	</script>
 </head>
 		<body>
 
@@ -66,24 +133,24 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
-				<table class="table table-bordered table-hover table-striped" border="1" width="80%">
+				<table id="exportTable" class="table table-bordered table-hover table-striped" border="1" width="80%">
 					<thead class="thead-light">
 						<th scope="col">Nombre</th>
 						<th scope="col">Apellido</th>
-						<th scope="col">Tipo Documento</th>
-						<th scope="col">Numero Documento</th>
+						<th scope="col">Tipo de Documento</th>
+						<th scope="col">Numero de Documento</th>
 						<th scope="col">Usuario</th>
-						<th scope="col">Contrasena</th>
-						<th scope="col">Direccion</th>
+						<th scope="col">Clave</th>
+						<th scope="col">Dirección</th>
 						<th scope="col">Telefono</th>
 						<th scope="col">Celular</th>
 						<th scope="col">Email</th>
-						<th scope="col">Fecha Reguistro</th>
+						<th scope="col">Fecha Registro</th>
 						<th scope="col">Fecha Nacimiento</th>
 						<th scope="col">Ciudad</th>
 						<th scope="col">Rol</th>
 						<th scope="col">Estado</th>
-						<th scope="row">Fecha Modificacion</th>
+						<th scope="row">Fecha Modificación</th>
 						<th scope="col">Editar</th>
 						<th scope="row">Eliminar</th>
 					</thead>
@@ -145,7 +212,7 @@
 					</tbody>
 				</table>
 					<a  class="btn btn-primary" role="button" href="Crear_Usuario.php">Agregar</a>
-						
+					<a  class="btn btn-primary" id="exportButton" role="button" style="background: red;">Exportar a PDF</a>
 				</div>
 			</div>
 		</div>
