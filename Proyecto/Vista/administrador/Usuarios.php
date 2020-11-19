@@ -76,7 +76,7 @@
                 );
 
                 pdf.saveAs({
-                    fileName: "PrepBootstrapPDF"
+                    fileName: "Tabla_Usuarios"
                 });
             });
         });
