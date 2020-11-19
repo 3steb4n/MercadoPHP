@@ -28,7 +28,7 @@
                     type: "table",
                     fields: {
                         Nombre: { type: String },
-                        Apellido: { type: Number },
+                        Apellido: { type: String },
 						TipoDocumento: { type: String },
 						NumeroDocumento: { type: String },
 						Usuario: { type: String },
