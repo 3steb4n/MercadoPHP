@@ -1,11 +1,33 @@
 <?php
-
-
-
+error_reporting(0);
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+        table
+        {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        table th
+        {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+        table th, table td
+        {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -14,79 +36,18 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-    <script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+	<script src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <script src="https://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 	<title>Usuarios</title>
-	<script type="text/javascript">
-	jQuery(function ($) {
-        $("#exportButton").click(function () {
-            // parse the HTML table element having an id=exportTable
-            var dataSource = shield.DataSource.create({
-                data: "#exportTable",
-                schema: {
-                    type: "table",
-                    fields: {
-                        Nombre: { type: String },
-                        Apellido: { type: String },
-						TipoDocumento: { type: String },
-						NumeroDocumento: { type: String },
-						Usuario: { type: String },
-						Clave: { type: String },
-						Dirección: { type: String },
-						Telefono: { type: String },
-						Celular: { type: String },
-						Email: { type: String },
-						FechaRegistro: { type: String },
-						FechaNacimiento: { type: String },
-						Ciudad: { type: String },
-						Rol: { type: String },
-						Estado: { type: String }
-                    }
-                }
-            });
-
-            dataSource.read().then(function (data) {
-                var pdf = new shield.exp.PDFDocument({
-                    author: "PrepBootstrap",
-                    created: new Date()
-                });
-
-                pdf.addPage("a4", "portrait");
-
-                pdf.table(
-                    50,
-                    50,
-                    data,
-                    [
-                        { field: "Nombre", title: "Nombre", width: 80 },
-						{ field: "Usuario", title: "Usuario", width: 80 },
-						{ field: "Clave", title: "Clave", width: 80 },
-						{ field: "Telefono", title: "Telefono", width: 80 },
-						{ field: "Celular", title: "Celular", width: 80 },
-						{ field: "Email", title: "Email", width: 80 }
-                    ],
-                    {
-                        margins: {
-                            top: 50,
-                            left: 50
-                        }
-                    }
-                );
-
-                pdf.saveAs({
-                    fileName: "Tabla_Usuarios"
-                });
-            });
-        });
-    });
-	</script>
+	
 </head>
 		<body>
 
-			<div>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">
+		<div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" style="position: fixed; z-index: 1000; width: 100%;">
+		<a class="navbar-brand" href="../../index.php">
 			<img src="../../Iconos_o_Imagenes/laptop.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				Tienda Virtual
 			</a>
@@ -95,43 +56,52 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
+					<?php 
+					if($_SESSION['userName'] == "")
+					{
+					?>
 						<li class="nav-item">
-							<a class="nav-link" href="Usuarios.php">Usuarios</a>
+							<a class="nav-link" href="Vista/Login.php">Iniciar Sesion</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Compras</a>
-						</li>
+						<?php
+					}else{
+						?>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Productos
+							<?php echo $_SESSION['userName']; ?>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Licoleria</a>
-								<a class="dropdown-item" href="#">Frutas y Verduras</a>
-								<a class="dropdown-item" href="#">Pasteleria</a>
-								<a class="dropdown-item" href="#">Para el hogar</a>
-								<a class="dropdown-item" href="#">.....</a>
+							<?php if($_SESSION['idRol'] == '1') {?>
+                            <a class="dropdown-item" href="Usuarios.php">Administrar Usuarios</a>
+                            <?php } ?>
+							<a class="dropdown-item" href="../usuarios/CerrarSesion.php">Cerrar Sesión</a>
 							</div>
+						</li>
+					<?php } ?>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Ofertas</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">¿Quienes Somos?</a>
 						</li>
 					</ul>
 				</div>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Nombre Producto" aria-label="Search">
+				<form class="form-inline my-2 my-lg-0" action="" method="get">
+					<input class="form-control mr-sm-2" name="nombreProducto" type="search" placeholder="Nombre Producto" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 				</form>
 				<a class="nav-link" href="#">
 				<img src="../../Iconos_o_Imagenes/carro.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				</a>
 			</nav>
-			<br>
-		</div>
+			<header>
 <div class="card container mx-auto" >
+<h1>Administrar usuarios</h1>
 	<div class="card-header">
-		<h2 align="center">Usuarios</h2>
-
+		<h2 align="center">Administrar usuarios</h2>
 	</div>
 	<div class="card-body">
-		<div class="table-responsive">
+		<div id="contentUsers" class="table-responsive">
 				<table id="exportTable" class="table table-bordered table-hover table-striped" border="1" width="80%">
 					<thead class="thead-light">
 						<th scope="col">Nombre</th>
@@ -210,15 +180,28 @@
 						?>							
 					</tbody>
 				</table>
-					<a  class="btn btn-primary" role="button" href="Crear_Usuario.php">Agregar</a>
-					<a  class="btn btn-primary" id="exportButton" role="button" style="background: red;">Exportar a PDF</a>
+				<a  class="btn btn-primary" role="button" href="Crear_Usuario.php">Agregar</a>
+				<br>
+				<input type="button" id="btnExport" value="Export" />
 				</div>
 			</div>
 		</div>
 				
-
-
-				
-				
-		</body>
+		<script type="text/javascript">
+        $("body").on("click", "#btnExport", function () {
+            html2canvas($('#exportTable'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 850
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Usuarios.pdf");
+                }
+            });
+        });
+    </script>
+	</body>
 </html>
