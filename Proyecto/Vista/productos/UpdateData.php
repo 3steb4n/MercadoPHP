@@ -15,7 +15,7 @@ if (isset($_POST['codigoProducto'])) {
         "rutaImagen" => $_POST['codigoProducto'] . ".jpg",
     ];
     echo $datosProductos['fechaVencimiento'];
-    include "DatabaseConnection.php";
+    include "../../PHP/DatabaseConnection.php";
     $codigoCategoria = "";
     echo $datosProductos['categoriaProducto'];
     $obtenerCodigoCategoria = "SELECT ID_CATEGORIA FROM CATEGORIAS WHERE NOMBRE_CATEGORIA = '" . $datosProductos['categoriaProducto'] . "'";
@@ -46,10 +46,10 @@ if (isset($_POST['codigoProducto'])) {
         if ($resultadoUpdateProd = mysqli_query($connectionDb, $actualizarProducto)) {
             if ($resultadoUpdateProdDet = mysqli_query($connectionDb, $actualizarProductoDetalle)) {
                 if ($_FILES['cargarImagen']['name'] != "") {
-                    if (!unlink('../Iconos_o_Imagenes/ProductoImagenes/' . $datosProductos['rutaImagen'])) {
+                    if (!unlink('../../Iconos_o_Imagenes/ProductoImagenes/' . $datosProductos['rutaImagen'])) {
                         echo "Error al actualizar la imagen";
                     }else{
-                        $tagRuta = "../Iconos_o_Imagenes/ProductoImagenes/";
+                        $tagRuta = "../../Iconos_o_Imagenes/ProductoImagenes/";
                         $tagImagen = $_FILES['cargarImagen']['name'];
                         $pathImagen = pathinfo($tagImagen);
                         $nombreImagen = $pathImagen['filename'];
@@ -58,7 +58,7 @@ if (isset($_POST['codigoProducto'])) {
                         move_uploaded_file($tempName, $imagen);
                     }       
                 }
-                header("Location: ../Vista/PaginaPrincipal.php");
+                header("Location: ../../index.php");
             }
         }
     }
