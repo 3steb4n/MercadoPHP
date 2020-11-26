@@ -1,16 +1,22 @@
 #div_productos {
     border: 1px solid #b5b5b5;
-    width: 30.5%;
-    height: 480px;
+    width: 20%;
+    height: 490px;
     padding: 5px;
     float: left;
     margin: 10px;
 }
 
 #contenidoProductos {
+    border: 1px solid black;
+    height: 100vh;
+    position: absolute;
     width: 100%;
     overflow: hidden;
     padding: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 #formularioActualizar {
