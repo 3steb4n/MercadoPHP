@@ -4,7 +4,7 @@ if(isset($_POST['codigoProducto'])){
         "codigoProducto" => $_POST['codigoProducto']
     ];
 
-    include "DatabaseConnection.php";
+    include "../../PHP/DatabaseConnection.php";
     $codigoCategoria = "";
     echo $datosProductos['categoriaProducto'];
     $connectionInstance = new DatabaseConnection();
@@ -14,7 +14,7 @@ if(isset($_POST['codigoProducto'])){
 
     if($connectionDb){
         if($resultadoUpdateProd = mysqli_query($connectionDb, $eliminarProducto)){
-            header("Location: ../Vista/PaginaPrincipal.php");
+            header("Location: ../../index.php");
         }
     }
 }
