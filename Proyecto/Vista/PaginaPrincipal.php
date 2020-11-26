@@ -6,14 +6,27 @@ session_start();
 <!doctype html>
 <html lang="en">
   <head>
+  <style>
+  .carousel-item {
+  height: 50vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+  </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<link rel="stylesheet" href="../Iconos_o_Imagenes/css/index.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="Iconos_o_Imagenes/css/index.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -37,15 +50,15 @@ session_start();
 	      PRODUCTOS.ID_ESTADO = 1;";
 		}else{
 		  $consultaProductos = "SELECT DETALLE_PRODUCTO.RUTA_IMAGEN, PRODUCTOS.NOMBRE_PRODUCTO, PRODUCTOS.DESCRIPCION_PRODUCTO, DETALLE_PRODUCTO.VALOR_PRODUCTO, 
-		  CATEGORIAS.NOMBRE_CATEGORIA, PRODUCTOS.ID_PRODUCTO  FROM PRODUCTOS, DETALLE_PRODUCTO, CATEGORIAS WHERE PRODUCTOS.NOMBRE_PRODUCTO = '$nombreProducto' 
+		  CATEGORIAS.NOMBRE_CATEGORIA, PRODUCTOS.ID_PRODUCTO  FROM PRODUCTOS, DETALLE_PRODUCTO, CATEGORIAS WHERE PRODUCTOS.NOMBRE_PRODUCTO LIKE '%$nombreProducto%'
 		  and PRODUCTOS.ID_PRODUCTO = DETALLE_PRODUCTO.ID_PRODUCTO and CATEGORIAS.ID_CATEGORIA = PRODUCTOS.ID_CATEGORIA and PRODUCTOS.ID_ESTADO = 1;";
 		}
 	  }
 	  $connectionDb = $connectionInstance -> ConnectDatabase();
 	  ?>
 	<div>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
-		<a class="navbar-brand" href="#">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" style="position: fixed; z-index: 1000; width: 100%;">
+		<a class="navbar-brand" href="index.php">
 			<img src="Iconos_o_Imagenes/laptop.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				Tienda Virtual
 			</a>
@@ -64,8 +77,16 @@ session_start();
 						<?php
 					}else{
 						?>
-						<li class="nav-item">
-							<a class="nav-link" href="Vista/usuarios/CerrarSesion.php">Cerrar Sesion</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<?php echo $_SESSION['userName']; ?>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<?php if($_SESSION['idRol'] == '1') {?>
+                            <a class="dropdown-item" href="Vista/administrador/Usuarios.php">Administrar Usuarios</a>
+                            <?php } ?>
+							<a class="dropdown-item" href="Vista/usuarios/CerrarSesion.php">Cerrar Sesión</a>
+							</div>
 						</li>
 					<?php } ?>
 						<li class="nav-item">
@@ -73,18 +94,6 @@ session_start();
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">¿Quienes Somos?</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Productos
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="#">Licoleria</a>
-								<a class="dropdown-item" href="#">Frutas y Verduras</a>
-								<a class="dropdown-item" href="#">Pasteleria</a>
-								<a class="dropdown-item" href="#">Para el hogar</a>
-								<a class="dropdown-item" href="#">.....</a>
-							</div>
 						</li>
 					</ul>
 				</div>
@@ -95,18 +104,41 @@ session_start();
 				<a class="nav-link" href="#">
 				<img src="Iconos_o_Imagenes/carro.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
 				</a>
-				<?php
-				if($_SESSION['userName'] != ""){
-				?>
-				<ul class="navbar-nav">
-                    <li class="nav-item">
-					    <a class="nav-link" href="Vista/Login.php"><?php echo $_SESSION['userName']; ?></a>
-					</li>
-				</ul>
-				<?php 		
-				}
-				?>
 			</nav>
+			<header>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item active" style="background-image: url('https://i.linio.com/cms/ad9d5b9e-2b34-11eb-a850-6e42975fe331.webp')">
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('https://dynamic-yield.linio.com//api/scripts/8767555/images/18ec6617aa4b5__BB2_OU.jpg')">
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item" style="background-image: url('https://i.linio.com/cms/ad9d5b9e-2b34-11eb-a850-6e42975fe331.webp')">
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+  </div>
+</header>
 			<div id="contenidoProductos">
 			<?php
 				if($connectionDb){
@@ -116,7 +148,7 @@ session_start();
 								$valorDecimal = number_format($filasDatos[3], 2);
 								?>
 								<div id="div_productos">
-								<img src="../Iconos_o_Imagenes/ProductoImagenes/<?php echo $filasDatos[0] ?>" width="100%" height="200px">
+								<img src="Iconos_o_Imagenes/ProductoImagenes/<?php echo $filasDatos[0] ?>" width="300px" height="230px">
 								<br>
 								<br>
 								<div style="margin: auto; right: 0; left: 0;">
@@ -128,15 +160,17 @@ session_start();
 								</div>
 								<br>
 								<br>
-								<a href="#" class="btn btn-info btn-lg">
-									<span class="glyphicon glyphicon-shopping-cart" type="submit"></span> Agregar al carrito
-								</a>
-								<br>
-								<br>
-								<form action="ActualizarProductos.php" method="post" class="btn btn-info btn-lg">
+								<?php if($_SESSION['idRol'] == 1){ ?>
+								<form action="Vista/productos/ActualizarProductos.php" method="post" class="btn btn-info btn-lg">
 									<input type="hidden" name="codigoProducto" value="<?php echo $filasDatos[5]; ?>">
 									<button type="submit" class="btn btn-info">Editar</button>
 								</form>
+								<?php }else if($_SESSION['idRol'] != 1){ ?>
+									<form action="Vista/productos/ActualizarProductos.php" method="post" class="btn btn-info btn-lg">
+									<input type="hidden" name="codigoProducto" value="<?php echo $filasDatos[5]; ?>">
+									<button type="submit" class="btn btn-info">Ver detalles</button>
+								</form>
+								<?php } ?> 
 								</div>
 								<?php
 							}
@@ -155,6 +189,26 @@ session_start();
 			?>
 			<br>
 			</div>
+		</div>
+		<div id="categoriasProductos" class="categoriasProductos" style="float: right; height: 50vh; width: 300px; padding: 20px;">
+		<div style="border: 1px solid black; padding: 10px;">
+		<h1>Categorias</h1>
+		<?php
+		$consultaCategorias = "SELECT NOMBRE_CATEGORIA FROM CATEGORIAS";
+		if($connectionDb){
+			if($resultadosConsultaCate = mysqli_query($connectionDb, $consultaCategorias)){
+				if(mysqli_num_rows($resultadosConsultaCate) > 0){
+					while($filasDatos = mysqli_fetch_array($resultadosConsultaCate)){
+						?>
+						<label for=""><?php echo $filasDatos[0]?></label>
+						<br>
+						<?php
+					}
+				}
+			}
+		}
+		?>
+		</div>
 		</div>
 		   <section>
        <?php
